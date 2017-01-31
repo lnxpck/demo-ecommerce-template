@@ -1,87 +1,25 @@
 /**
- * Created by fr20281 on 27/01/2017.
+ * Created by plesaint on 27/01/2017.
  */
 var express = require('express');
 var app = express();
 
+var backend = require('./routes/backend.js');
+var facture = require('./routes/facture.js');
+var root = require('./routes/root.js');
+
 // set the view engine to ejs
 app.set('view engine', 'ejs');
 
+// set static folder
 app.use(express.static('public'));
 
-// use res.render to load up an ejs view file
-app.get('/', function(req, res) {
-    res.redirect('/index');
-});
-
-app.get('/index', function(req, res) {
-   res.render('frontend/index');
-});
-
-app.get('/texte', function(req, res) {
-    res.render('frontend/texte');
-});
-
-app.get('/connexion', function(req, res) {
-    res.render('frontend/connexion');
-});
-
-app.get('/adresses', function(req, res) {
-    res.render('frontend/adresses');
-});
-
-app.get('/factures', function(req, res) {
-    res.render('frontend/factures');
-});
-
-app.get('/inscription', function(req, res) {
-    res.render('frontend/inscription');
-});
-
-app.get('/livraison', function(req, res) {
-    res.render('frontend/livraison');
-});
-
-app.get('/mon-compte', function(req, res) {
-    res.render('frontend/mon-compte');
-});
-
-app.get('/mot-de-passe-perdu', function(req, res) {
-    res.render('frontend/mot-de-passe-perdu');
-});
-
-app.get('/nouveau-mot-de-passe', function(req, res) {
-    res.render('frontend/nouveau-mot-de-passe');
-});
-
-app.get('/panier', function(req, res) {
-    res.render('frontend/panier');
-});
-
-app.get('/produit', function(req, res) {
-    res.render('frontend/produit');
-});
-
-app.get('/validation', function(req, res) {
-    res.render('frontend/validation');
-});
-
-app.get('/backend/index', function(req, res) {
-    res.render('backend/index');
-});
-
-app.get('/backend/ajout-edit', function(req, res) {
-    res.render('backend/ajout-edit');
-});
-
-app.get('/backend/factures', function(req, res) {
-    res.render('backend/factures');
-});
-
-app.get('/facture', function(req, res) {
-    res.render('facture/facturePDF');
-});
-
-
+// set routes
+app.use('/backend', backend);
+app.use('/facture', facture);
+app.use('/', root);
 
 app.listen(8080);
+console.log('Server running on port 8080...');
+console.log('Front-End : http://localhost:8080/index');
+console.log('Back-End : http://localhost:8080/admin/index');
